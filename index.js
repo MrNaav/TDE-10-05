@@ -1,7 +1,17 @@
-const server = require("./server");
+const express = require("express");
 
-const PORT = process.env.PORT || 3000;
+const userRouter = require("./routes/user")
+const recipeRouter = require("./routes/recipe")
 
-server.listen(PORT,() => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+const port = 8000;
+const server = express();
+
+
+server.use(express.json())
+
+server.use(userRouter)
+server.use(recipeRouter)
+
+server.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`)
+})
